@@ -99,6 +99,50 @@ nav{display:flex;justify-content:center;padding:16px}
 .soon h3{font-size:26px;margin:8px 0}
 .soon p{color:var(--muted)}
 .pnote{color:var(--muted);margin-top:18px;max-width:60em}
+/* online */
+.ogrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;align-items:stretch}
+.oprice{background:var(--blk);color:#ededeb;border-radius:16px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:6px;border:1px solid var(--gold)}
+.oprice .top{display:flex;justify-content:space-between;gap:8px;color:#a3a39f}
+.oprice .top b{color:var(--gold);font-weight:500}
+.oprice h3{font-size:clamp(28px,3vw,36px);margin-top:12px}
+.oprice .amt{font:500 clamp(48px,5.4vw,68px)/1 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--gold);margin-top:10px;font-variant-numeric:tabular-nums}
+.oprice .amt small{font:400 16px "IBM Plex Sans Thai",sans-serif;color:#a3a39f;letter-spacing:0}
+.oprice .per{color:#a3a39f}
+.oprice ul{list-style:none;margin:16px 0 0;padding:16px 0 0;border-top:1px dashed #3a3a3c;display:grid;gap:8px;font-size:15px;color:#d6d6d2}
+.oprice li{display:flex;gap:10px}
+.oprice li::before{content:"+";color:var(--gold)}
+.oprice .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:22px}
+.oprice .btn.ghost{color:#ededeb;border-color:#5a5a5c}
+.oprice .nb{color:#a3a39f;margin-top:12px}
+.oside{display:grid;gap:14px;align-content:start}
+.obox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.obox h3{font-size:20px;font-weight:500;letter-spacing:-.01em}
+.obox h3+*{margin-top:12px}
+.orow{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.orow:first-of-type{border-top:0;padding-top:0}
+.orow b{font:500 12.5px/1.9 "IBM Plex Mono",monospace;color:var(--goldt)}
+.orow p{color:var(--muted);font-size:15px}
+.orow p strong{color:var(--ink);font-weight:500;display:block}
+.ofit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.ofit ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;color:var(--muted);font-size:15px}
+.ofit li{display:flex;gap:8px}
+.ofit li::before{content:"·";color:var(--goldt);font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:14px;counter-reset:st}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.step .m{color:var(--goldt)}
+.step h4{margin:0;font-size:17px;font-weight:500}
+.step p{color:var(--muted);font-size:14.5px;line-height:1.55}
+.ohd{margin:clamp(40px,5vw,64px) 0 0;display:flex;justify-content:space-between;align-items:end;gap:14px;flex-wrap:wrap}
+.ohd h3{font-size:clamp(22px,2.4vw,28px)}
+.refund{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.rrow{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,1.5fr);gap:16px;padding:16px 22px;border-top:1px solid var(--line);font-size:15px;align-items:baseline}
+.rrow:first-child{border-top:0;color:var(--muted)}
+.rrow b{font:500 17px "Inter Tight","IBM Plex Sans Thai",sans-serif;color:var(--goldt);white-space:nowrap}
+.rrow span:last-child{color:var(--muted)}
+.rfoot{padding:14px 22px;border-top:1px dashed var(--line);color:var(--muted)}
+.disc{color:var(--muted);margin-top:18px;max-width:60em}
+@media(max-width:1000px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:780px){.ogrid,.ofit{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:minmax(0,1fr)}.rrow{grid-template-columns:minmax(0,1fr) auto;gap:4px 14px}.rrow span:last-child{grid-column:1/-1}.rrow:first-child{display:none}}
 /* coach */
 .coach{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
 .coach figure{margin:0;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#000}
@@ -189,6 +233,7 @@ details p{padding:0 0 18px;color:var(--muted)}
       <a class="lnk m" href="#about">เกี่ยวกับ</a>
       <a class="lnk m" href="#programs">โปรแกรม</a>
       <a class="lnk m" href="#pricing">ราคา</a>
+      <a class="lnk m" href="#online">ออนไลน์</a>
       <a class="lnk m" href="#calc">คำนวณแคล</a>
       <a class="lnk m" href="#faq">คำถาม</a>
       <a class="btn" href="#contact">จองเทรน</a>
@@ -274,10 +319,76 @@ details p{padding:0 0 18px;color:var(--muted)}
     <div class="tabs m" role="tablist" aria-label="รูปแบบการเทรน">
       <button role="tab" id="t1" aria-selected="true" data-k="solo">เทรนเดี่ยว 1:1</button>
       <button role="tab" id="t2" aria-selected="false" data-k="duo">เทรนคู่ 2:1</button>
-      <button role="tab" id="t3" aria-selected="false" data-k="online">ออนไลน์ · ยังไม่เปิดรับ</button>
+      <button role="tab" id="t3" aria-selected="false" data-k="online">ออนไลน์ 12 สัปดาห์</button>
     </div>
     <div id="tiers" role="tabpanel"></div>
     <p class="m pnote">* คอร์ส 2:1 เป็นราคารวม 2 ท่าน แถมสมาชิกทั้ง 2 ท่าน · อายุคอร์สนับจากวันที่ซื้อ ชั่วโมงที่เหลือเกินอายุคอร์สถือว่าหมดอายุ · ชำระเต็มจำนวน</p>
+  </div>
+</section>
+
+<section class="band" id="online" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <span class="m tag">เทรนออนไลน์ · เปิดรับแล้ว</span>
+      <div><h2>โค้ชดูแลทุกสัปดาห์<br>แม้ไม่ได้เจอกัน</h2><p>สำหรับคนที่อยากเล่นเวทเองแบบมีแผน ได้โปรแกรมที่ออกแบบจากเป้าหมาย อุปกรณ์ และวันที่เล่นได้จริง มีโค้ชตรวจท่าจากคลิป ติดตามผลทุกสัปดาห์ และปรับโปรแกรมให้ตลอด 12 สัปดาห์</p></div>
+    </div>
+
+    <div class="ogrid">
+      <article class="oprice">
+        <div class="top m"><span>แพ็กเกจเดียว</span><b>ราคาเดียว</b></div>
+        <h3>12 สัปดาห์</h3>
+        <div class="amt">6,900 <small>บาท</small></div>
+        <div class="per m">เฉลี่ย 575 บาท / สัปดาห์</div>
+        <ul>
+          <li>ประเมินท่าจากคลิปก่อนเริ่ม เลือกท่าที่เหมาะกับร่างกาย</li>
+          <li>โปรแกรมเวทเฉพาะคุณ ปรับใหม่ทุก 4 สัปดาห์</li>
+          <li>Check-in ทุกสัปดาห์ โค้ชตอบและปรับให้ทาง LINE</li>
+          <li>วัดผลสัปดาห์ที่ 1, 4, 8, 12</li>
+          <li>ไฟล์บันทึกน้ำหนัก ครั้ง และสรุปความคืบหน้า</li>
+          <li>แนะนำอาหารเบื้องต้นตามเป้าหมาย</li>
+        </ul>
+        <div class="cta">
+          <a class="btn" href="https://script.google.com/macros/s/AKfycbwIGsFATG1C_cztPBxm6r4nfC9i6hrEtKIDfpwB8P0WylkFQ5xvJ_CD8idU3WNt_MfwqA/exec" target="_blank" rel="noopener">สมัครเทรนออนไลน์</a>
+          <a class="btn ghost" href="https://line.me/R/ti/p/@262hshjd">ถามโค้ชก่อน</a>
+        </div>
+        <p class="m nb">ยังไม่ต้องโอนเงิน จนกว่าโค้ชประเมินคลิปและแจ้งเงื่อนไขครบ</p>
+      </article>
+
+      <div class="oside">
+        <div class="obox">
+          <h3>ได้อะไรในแต่ละสัปดาห์</h3>
+          <div class="orow"><b>01</b><p><strong>เล่นตามโปรแกรม</strong>เปิดไฟล์ในมือถือ กรอกน้ำหนักและจำนวนครั้งหลังเล่นจบ มีวิธีทำท่าทุกท่า</p></div>
+          <div class="orow"><b>02</b><p><strong>ส่ง Check-in</strong>ฟอร์มสั้น ๆ ทุกสัปดาห์ น้ำหนักตัว การนอน ความเหนื่อย อาการเจ็บ และคลิปท่าที่อยากให้ดู</p></div>
+          <div class="orow"><b>03</b><p><strong>โค้ชตอบและปรับ</strong>ดูตัวเลขที่บันทึก บอกจุดที่ต้องแก้ เพิ่มหรือลดความหนักให้เหมาะกับสัปดาห์นั้น</p></div>
+          <div class="orow"><b>04</b><p><strong>วัดผลทุก 4 สัปดาห์</strong>น้ำหนัก ไขมัน รอบเอว สะโพก แขน ต้นขา วิดพื้น แพลงก์ และน้ำหนักท่าหลัก แล้วออกแบบช่วงถัดไป</p></div>
+        </div>
+        <div class="ofit">
+          <div class="obox"><h3>เหมาะกับ</h3><ul><li>คนที่เข้ายิมเองได้แต่ไม่รู้จะเล่นอะไร</li><li>คนที่เวลาไม่ตรงกับการนัดเทรน</li><li>อดีตลูกเทรนที่อยากเล่นต่อเอง</li><li>มือใหม่ที่ทำท่าพื้นฐานได้</li></ul></div>
+          <div class="obox"><h3>ต้องมี</h3><ul><li>ยิม หรือดัมเบลที่บ้าน</li><li>เล่นได้ 2–4 วัน / สัปดาห์</li><li>มือถือถ่ายคลิปได้</li><li>LINE สำหรับคุยกับโค้ช</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ohd"><h3>ขั้นตอนสมัคร</h3><span class="m" style="color:var(--muted)">ใช้เวลาประมาณ 3–5 วันก่อนเริ่มเทรน</span></div>
+    <div class="steps">
+      <div class="step"><span class="m">ขั้น 1</span><h4>กรอกใบสมัคร</h4><p>เป้าหมาย ประสบการณ์ อุปกรณ์ วันที่เล่นได้ และสุขภาพ ประมาณ 5 นาที</p></div>
+      <div class="step"><span class="m">ขั้น 2</span><h4>ส่งคลิปท่าพื้นฐาน</h4><p>โค้ชส่งคู่มือถ่ายคลิปให้ทาง LINE ถ่ายตามมุมที่บอก</p></div>
+      <div class="step"><span class="m">ขั้น 3</span><h4>รับผลประเมิน</h4><p>โค้ชบอกท่าที่ทำได้ดี ท่าที่ต้องปรับ พร้อมเงื่อนไขทั้งหมดก่อนชำระเงิน</p></div>
+      <div class="step"><span class="m">ขั้น 4</span><h4>ชำระเงิน</h4><p>โอน 6,900 บาทผ่านพร้อมเพย์ แล้วส่งสลิปทาง LINE</p></div>
+      <div class="step"><span class="m">ขั้น 5</span><h4>เริ่มเทรน</h4><p>รับไฟล์โปรแกรมและลิงก์ Check-in เริ่มสัปดาห์ที่ 1 พร้อมวัดผลครั้งแรก</p></div>
+    </div>
+
+    <div class="ohd"><h3>เงื่อนไขการคืนเงิน</h3><span class="m" style="color:var(--muted)">แจ้งให้ทราบก่อนชำระเงินทุกครั้ง</span></div>
+    <div class="refund">
+      <div class="rrow m"><span>กรณี</span><span>ได้คืน</span><span>เหตุผล</span></div>
+      <div class="rrow"><span>เปลี่ยนใจภายใน 7 วันหลังโอน ยังไม่ได้รับโปรแกรม</span><b>6,900</b><span>คืนเต็มจำนวน โค้ชยังไม่ได้ให้บริการ</span></div>
+      <div class="rrow"><span>เปลี่ยนใจภายใน 7 วันหลังโอน ได้รับโปรแกรมแล้ว</span><b>4,825</b><span>หัก 2,075 = ค่าออกแบบโปรแกรม 1,500 + ค่าดูแลสัปดาห์แรก 575</span></div>
+      <div class="rrow"><span>โค้ชประเมินคลิปแล้วรับเทรนไม่ได้</span><b>6,900</b><span>คืนเต็มจำนวน</span></div>
+      <div class="rrow"><span>หยุดกลางคันเพราะปัญหาสุขภาพ (มีใบรับรองแพทย์) หรือโค้ชดูแลต่อไม่ได้</span><b>575 × สัปดาห์</b><span>คืนตามสัปดาห์ที่เหลือ เช่น หยุดหลังสัปดาห์ที่ 4 คืน 4,600</span></div>
+      <div class="rrow"><span>เกิน 7 วัน และเลิกเองด้วยเหตุผลอื่น</span><b>ไม่คืน</b><span>ขอพักโปรแกรมได้ 1 ครั้ง ไม่เกิน 4 สัปดาห์ แล้วกลับมาเทรนต่อจนครบ</span></div>
+      <div class="rfoot m">โอนเงินคืนภายใน 15 วันหลังแจ้ง · แจ้งขอคืนเงินหรือพักโปรแกรมทาง LINE</div>
+    </div>
+    <p class="m disc">* ผลลัพธ์ของแต่ละคนไม่เท่ากัน ขึ้นกับความสม่ำเสมอ การนอน อาหาร และสภาพร่างกาย โค้ชไม่การันตีตัวเลขน้ำหนักหรือไขมันที่ลดได้ · ผู้มีโรคประจำตัวหรือตั้งครรภ์ควรปรึกษาแพทย์ก่อนเริ่ม</p>
   </div>
 </section>
 
@@ -356,7 +467,8 @@ details p{padding:0 0 18px;color:var(--muted)}
         <details><summary>ทดลองเทรนก่อนซื้อคอร์สได้ไหม</summary><p class="m">ได้ ทดลอง 1 ชั่วโมง 500 บาท (2:1 ราคา 750 บาท) แถมวัดไขมัน กล้ามเนื้อ สัดส่วน ประเมินท่า และใบสรุปผล</p></details>
         <details><summary>ต้องมาเทรนสัปดาห์ละกี่วัน</summary><p class="m">เริ่มได้ตั้งแต่ 1 วัน แต่ 2–3 วันต่อสัปดาห์จะเห็นผลชัดกว่า</p></details>
         <details><summary>ลาหรือเลื่อนได้ไหม</summary><p class="m">ได้ แจ้งล่วงหน้าแล้วนัดใหม่ ชั่วโมงไม่หายภายในอายุคอร์ส แต่ชั่วโมงที่เหลือเกินอายุคอร์สถือว่าหมดอายุ</p></details>
-        <details><summary>เทรนออนไลน์เปิดรับหรือยัง</summary><p class="m">ตอนนี้ยังไม่เปิดรับ ทัก LINE ไว้เพื่อรับแจ้งเตือนเมื่อเปิด</p></details>
+        <details><summary>เทรนออนไลน์ต่างจากเทรนที่ยิมยังไง</summary><p class="m">เทรนที่ยิมมีโค้ชอยู่ข้าง ๆ ทุกครั้ง ส่วนออนไลน์คุณเล่นเองตามโปรแกรม แล้วโค้ชตรวจท่าจากคลิปและปรับโปรแกรมจาก Check-in ทุกสัปดาห์ ราคา 12 สัปดาห์ 6,900 บาท ดูรายละเอียดในหัวข้อเทรนออนไลน์</p></details>
+        <details><summary>ไม่เคยเล่นเวท สมัครออนไลน์ได้ไหม</summary><p class="m">ได้ถ้าทำท่าพื้นฐานได้ โค้ชจะดูจากคลิปก่อน ถ้าท่าไหนยังไม่พร้อมจะคุยกันก่อนชำระเงิน บางคนอาจเหมาะกับการเทรนที่ยิมก่อนสัก 2–3 ครั้ง</p></details>
       </div>
       <figure class="fimg"><img src="coach_close.jpg" alt="โค้ชดรีม"></figure>
     </div>
@@ -370,7 +482,7 @@ details p{padding:0 0 18px;color:var(--muted)}
       <p class="d m">ทักมาบอกเป้าหมายและวันเวลาที่สะดวก โค้ชจะแนะนำแพ็กเกจที่เหมาะกับคุณ</p>
       <a class="btn" style="margin-top:20px" href="https://line.me/R/ti/p/@262hshjd">แอด LINE @262hshjd</a>
     </div>
-    <div><h4 class="m">เทรน</h4><ul class="m"><li><a href="#programs">Lift</a></li><li><a href="#programs">Lean</a></li><li><a href="#programs">Sport</a></li><li><a href="#pricing">ทดลองเทรน</a></li></ul></div>
+    <div><h4 class="m">เทรน</h4><ul class="m"><li><a href="#programs">Lift</a></li><li><a href="#programs">Lean</a></li><li><a href="#programs">Sport</a></li><li><a href="#pricing">ทดลองเทรน</a></li><li><a href="#online">เทรนออนไลน์</a></li></ul></div>
     <div><h4 class="m">Coach Dream</h4><ul class="m"><li><a href="#about">เกี่ยวกับ</a></li><li><a href="#pricing">ราคาคอร์ส</a></li><li><a href="#coach">โค้ช</a></li><li><a href="#faq">คำถามที่พบบ่อย</a></li></ul></div>
     <div><h4 class="m">ติดต่อ</h4><ul class="m"><li><a href="https://line.me/R/ti/p/@262hshjd">LINE @262hshjd</a></li><li><a href="https://www.instagram.com/dream_pongsaton/">IG @dream_pongsaton</a></li><li><a href="https://www.facebook.com/share/18y2jWgqLt/">Facebook</a></li></ul></div>
   </div>
@@ -397,7 +509,7 @@ const baht=n=>n.toLocaleString('th-TH');
 const show=k=>{
   box.className=k==='online'?'':'tiers';
   box.innerHTML=k==='online'
-    ?`<div class="soon"><span class="m" style="color:var(--goldt)">ยังไม่เปิดรับ</span><h3>เทรนออนไลน์</h3><p>รับโปรแกรมไปเล่นเองได้ทุกที่ ส่งคลิปท่าให้โค้ชตรวจและปรับโปรแกรม ตอนนี้ยังไม่เปิดรับสมัคร ทัก LINE ไว้เพื่อรับแจ้งเตือนเมื่อเปิด</p></div>`
+    ?`<div class="soon"><span class="m" style="color:var(--goldt)">เปิดรับแล้ว</span><h3>เทรนออนไลน์ 12 สัปดาห์ · 6,900 บาท</h3><p>รับโปรแกรมเฉพาะคุณไปเล่นเองได้ทุกที่ โค้ชประเมินท่าจากคลิป ติดตาม Check-in ทุกสัปดาห์ และวัดผลทุก 4 สัปดาห์</p><a class="btn" style="margin-top:16px" href="#online">ดูรายละเอียด</a></div>`
     :P[k].map(t=>`<article class="tier${t.best?' best':''}"><div class="top m"><span>${t.n}</span>${t.save?`<b>${t.save}</b>`:''}</div><h3>${t.h} ชั่วโมง</h3><div class="amt">${baht(t.p)} <small>บาท</small></div><div class="per m">${t.per}</div><ul>${t.f.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
   tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.k===k));
   box.setAttribute('aria-labelledby',tabs.find(b=>b.dataset.k===k).id);
