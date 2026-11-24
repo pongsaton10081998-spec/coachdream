@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coach Dream Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE occasion: a quiet, premium training-studio site in monochrome
+   IDEA a black-and-white gym photo book with typewritten captions and one gold mark
+   PICTURE the coach's own photo in black and white, large rounded frames
+   COLOUR paper #f4f4f2 with faint dot grid, ink #111, black panels #121213, gold #E0A100 as the single accent
+   TYPE Inter Tight + IBM Plex Sans Thai light display, IBM Plex Mono for small captions
+   LAYOUT laptop: rounded photo hero with caption corners, then alternating paper and black bands; phone: stacked */
+:root{color-scheme:light dark;--bg:light-dark(#f4f4f2,#0c0c0d);--card:light-dark(#ffffff,#161617);--ink:light-dark(#111111,#ededeb);--muted:light-dark(#62625f,#a3a39f);--line:light-dark(#dcdcd8,#2a2a2c);--dot:light-dark(#d9d9d5,#1e1e20);--blk:#121213;--gold:#E0A100;--goldt:light-dark(#9c7000,#f2b72a)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:16.5px/1.65 "Inter Tight","IBM Plex Sans Thai","Loma",system-ui,sans-serif;background:var(--bg) radial-gradient(var(--dot) 1px,transparent 1.2px) 0 0/16px 16px;overflow-x:clip}
+h1,h2,h3{margin:0;font-weight:400;letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.m{font:400 12.5px/1.6 "IBM Plex Mono","IBM Plex Sans Thai",monospace;text-transform:uppercase;letter-spacing:.02em}
+.wrap{max-width:1220px;margin:0 auto;padding:0 max(4vw,16px)}
+.band{padding:clamp(64px,9vw,128px) 0}
+.tag{color:var(--goldt);margin-bottom:14px;display:block}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;border-radius:8px;background:var(--gold);color:#111;text-decoration:none;font:500 14px "Inter Tight","IBM Plex Sans Thai",sans-serif;border:0;cursor:pointer}
+.btn::after{content:"→"}
+.btn:hover{background:#f2b72a}
+.btn.ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.btn.ghost::after{content:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+/* hero */
+.shell{padding:12px}
+.hero{position:relative;border-radius:18px;overflow:hidden;background:var(--blk);color:#fff;min-height:min(94svh,860px);display:flex;flex-direction:column}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 6%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,11,.92) 0%,rgba(10,10,11,.35) 45%,rgba(10,10,11,.45) 100%)}
+.hero>*:not(img){position:relative;z-index:1}
+nav{display:flex;justify-content:center;padding:16px}
+.pill{display:flex;align-items:center;gap:2px;flex-wrap:wrap;justify-content:center;background:rgba(20,20,22,.72);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:5px}
+.pill .brand{font-weight:600;font-size:14px;background:rgba(255,255,255,.1);border-radius:7px;padding:8px 12px;text-decoration:none;white-space:nowrap}
+.pill .lnk{font-size:12px;color:#c9c9c5;text-decoration:none;padding:10px 10px}
+.pill .lnk:hover{color:#fff}
+.pill .btn{min-height:34px;padding:0 12px;font-size:13px;margin-left:4px}
+.marks{display:flex;justify-content:space-between;gap:16px;padding:0 clamp(18px,3vw,36px);margin-top:clamp(40px,12vh,120px);color:#d6d6d2}
+.hb{margin-top:auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:end;padding:clamp(18px,3vw,36px);border-top:1px solid rgba(255,255,255,.16);margin-inline:clamp(18px,3vw,36px);padding-inline:0}
+.hb h1{font-size:clamp(40px,6vw,76px);font-weight:400}
+.hb h1 em{font-style:normal;color:var(--gold)}
+.hb .r{display:flex;flex-direction:column;gap:16px;align-items:flex-start;color:#d6d6d2;max-width:34em;justify-self:end}
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px}
+.about h2{font-size:clamp(24px,2.8vw,34px);line-height:1.4;font-weight:300}
+.about h2 b{font-weight:500}
+.who{display:flex;align-items:center;gap:12px;margin:22px 0}
+.who img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:30% 20%;border:2px solid var(--bg)}
+.wide{margin-top:clamp(36px,5vw,56px);border-radius:16px;overflow:hidden;aspect-ratio:21/8;background:var(--blk)}
+.wide img{width:100%;height:100%;object-fit:cover;object-position:30% 35%;display:block}
+/* dark band */
+.dark{background:var(--blk);color:#ededeb;position:relative;overflow:hidden}
+.dark .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.dark h2{font-size:clamp(30px,4vw,48px)}
+.dark p.d{color:#a3a39f;margin-top:16px}
+.spec{margin-top:8px}
+.spec div{display:grid;grid-template-columns:9.5em 1em minmax(0,1fr);padding:14px 0;border-bottom:1px solid #2a2a2c;color:#d6d6d2}
+.spec div span:first-child{color:#ededeb}
+.spec div span:last-child{text-transform:none}
+/* programs */
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;margin-bottom:40px}
+.head h2{font-size:clamp(30px,3.8vw,46px)}
+.head p{color:var(--muted);margin-top:14px;max-width:36em}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pc{position:relative;border-radius:16px;overflow:hidden;background:var(--blk);color:#ededeb;min-height:360px;display:flex;flex-direction:column;justify-content:space-between;padding:22px}
+.pc svg.bg{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+.pc svg.bg>:not(rect):not(defs){transform:translate(75px,64px) scale(.5)}
+.pc>*{position:relative}
+.pc h3{font-size:30px}
+.pc h3 small{display:block;font-size:16px;color:#a3a39f;letter-spacing:0;margin-top:6px}
+.pc p{color:#c9c9c5;max-width:22em}
+/* pricing */
+.tabs{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:10px;padding:4px;background:var(--card);margin-bottom:22px;flex-wrap:wrap}
+.tabs button{min-height:40px;padding:0 14px;border:0;border-radius:7px;background:transparent;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--bg)}
+.tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:6px}
+.tier.best{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.tier .top{display:flex;justify-content:space-between;gap:8px;color:var(--muted)}
+.tier .top b{color:var(--goldt);font-weight:500}
+.tier h3{font-size:22px;margin-top:10px}
+.tier .amt{font:500 clamp(32px,3vw,40px)/1.1 "Inter Tight",sans-serif;letter-spacing:-.03em;white-space:nowrap;margin-top:8px}
+.tier .amt small{font:400 14px "IBM Plex Sans Thai",sans-serif;color:var(--muted);letter-spacing:0}
+.tier .per{color:var(--muted)}
+.tier ul{list-style:none;margin:12px 0 0;padding:12px 0 0;border-top:1px dashed var(--line);display:grid;gap:6px;font-size:14.5px}
+.tier li{display:flex;gap:8px}
+.tier li::before{content:"+";color:var(--goldt)}
+.soon{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:26px;max-width:620px}
+.soon h3{font-size:26px;margin:8px 0}
+.soon p{color:var(--muted)}
+.pnote{color:var(--muted);margin-top:18px;max-width:60em}
+/* online */
+.ogrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;align-items:stretch}
+.oprice{background:var(--blk);color:#ededeb;border-radius:16px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:6px;border:1px solid var(--gold)}
+.oprice .top{display:flex;justify-content:space-between;gap:8px;color:#a3a39f}
+.oprice .top b{color:var(--gold);font-weight:500}
+.oprice h3{font-size:clamp(28px,3vw,36px);margin-top:12px}
+.oprice .amt{font:500 clamp(48px,5.4vw,68px)/1 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--gold);margin-top:10px;font-variant-numeric:tabular-nums}
+.oprice .amt small{font:400 16px "IBM Plex Sans Thai",sans-serif;color:#a3a39f;letter-spacing:0}
+.oprice .per{color:#a3a39f}
+.oprice ul{list-style:none;margin:16px 0 0;padding:16px 0 0;border-top:1px dashed #3a3a3c;display:grid;gap:8px;font-size:15px;color:#d6d6d2}
+.oprice li{display:flex;gap:10px}
+.oprice li::before{content:"+";color:var(--gold)}
+.oprice .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:22px}
+.oprice .btn.ghost{color:#ededeb;border-color:#5a5a5c}
+.oprice .nb{color:#a3a39f;margin-top:12px}
+.oside{display:grid;gap:14px;align-content:start}
+.obox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.obox h3{font-size:20px;font-weight:500;letter-spacing:-.01em}
+.obox h3+*{margin-top:12px}
+.orow{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.orow:first-of-type{border-top:0;padding-top:0}
+.orow b{font:500 12.5px/1.9 "IBM Plex Mono",monospace;color:var(--goldt)}
+.orow p{color:var(--muted);font-size:15px}
+.orow p strong{color:var(--ink);font-weight:500;display:block}
+.ofit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.ofit ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;color:var(--muted);font-size:15px}
+.ofit li{display:flex;gap:8px}
+.ofit li::before{content:"·";color:var(--goldt);font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:14px;counter-reset:st}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.step .m{color:var(--goldt)}
+.step h4{margin:0;font-size:17px;font-weight:500}
+.step p{color:var(--muted);font-size:14.5px;line-height:1.55}
+.ohd{margin:clamp(40px,5vw,64px) 0 0;display:flex;justify-content:space-between;align-items:end;gap:14px;flex-wrap:wrap}
+.ohd h3{font-size:clamp(22px,2.4vw,28px)}
+.refund{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.rrow{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,1.5fr);gap:16px;padding:16px 22px;border-top:1px solid var(--line);font-size:15px;align-items:baseline}
+.rrow:first-child{border-top:0;color:var(--muted)}
+.rrow b{font:500 17px "Inter Tight","IBM Plex Sans Thai",sans-serif;color:var(--goldt);white-space:nowrap}
+.rrow span:last-child{color:var(--muted)}
+.rfoot{padding:14px 22px;border-top:1px dashed var(--line);color:var(--muted)}
+.disc{color:var(--muted);margin-top:18px;max-width:60em}
+@media(max-width:1000px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:780px){.ogrid,.ofit{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:minmax(0,1fr)}.rrow{grid-template-columns:minmax(0,1fr) auto;gap:4px 14px}.rrow span:last-child{grid-column:1/-1}.rrow:first-child{display:none}}
+/* coach */
+.coach{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.coach figure{margin:0;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#000}
+.coach figure img{width:100%;height:100%;object-fit:cover;object-position:40% 20%;display:block}
+.coach .cap{display:flex;justify-content:space-between;margin-top:12px;color:#a3a39f}
+.coach h2{font-size:clamp(30px,4vw,48px)}
+.coach ul{list-style:none;padding:0;margin:26px 0 0}
+.coach li{display:grid;grid-template-columns:6em minmax(0,1fr);gap:12px;padding:14px 0;border-top:1px solid #2a2a2c;color:#c9c9c5}
+.coach li b{color:var(--gold);font-weight:500}
+/* faq */
+.faqg{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:14px;padding:18px 0;font-size:16px}
+summary::after{content:"+";font-size:20px;line-height:1;color:var(--muted)}
+details[open] summary{color:var(--goldt)}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 18px;color:var(--muted)}
+.calc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px;position:sticky;top:20px}
+.calc .k{font:500 clamp(44px,5vw,64px)/1 "Inter Tight",sans-serif;letter-spacing:-.03em}
+.calc .k small{font:400 15px "IBM Plex Sans Thai",sans-serif;color:var(--muted)}
+.calc p{color:var(--muted)}
+.calc .btn{align-self:flex-start}
+.cert{margin-top:26px;border:1px solid #3a3a3c;border-radius:14px;padding:20px 22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start;font-family:"Inter Tight",sans-serif}
+.cert svg{width:40px;height:40px}
+.cert h3{font-size:20px;font-weight:500;color:#ededeb;letter-spacing:-.01em}
+.cert p{color:#a3a39f;font-size:14.5px;margin-top:4px;line-height:1.5}
+.cert dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:12px 0 0;font:400 12.5px/1.6 "IBM Plex Mono",monospace;text-transform:uppercase;color:#c9c9c5}
+.cert dt{color:#a3a39f}
+.cert dd{margin:0}
+.fimg{margin:0;border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:#000;position:sticky;top:20px}
+.fimg img{width:100%;height:100%;object-fit:cover;object-position:30% 30%;display:block}
+#calc .head p.d{color:#a3a39f;margin-top:14px}
+#calc{border-top:1px solid #2a2a2c}
+.cgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.cform{background:#19191b;border:1px solid #2a2a2c;border-radius:16px;padding:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-content:start}
+.cform label,.f2{display:flex;flex-direction:column;gap:8px;color:#a3a39f}
+.f2{grid-column:1/-1}
+.cform input,.cform select{font:16px "IBM Plex Sans Thai","Loma",sans-serif;min-height:46px;padding:0 12px;border:1px solid #3a3a3c;border-radius:8px;background:#121213;color:#ededeb;width:100%}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{flex:1 1 auto;min-height:44px;border:1px solid #3a3a3c;border-radius:8px;background:#121213;color:#c9c9c5;font:500 15px "IBM Plex Sans Thai",sans-serif;cursor:pointer;padding:0 12px}
+.seg button[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:#111}
+.cform input:focus-visible,.cform select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.cres{border:1px solid var(--gold);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.kc{font:500 clamp(56px,7vw,88px)/1 "Inter Tight",sans-serif;letter-spacing:-.04em;color:var(--gold);font-variant-numeric:tabular-nums}
+.kc small{font:400 18px "IBM Plex Sans Thai",sans-serif;color:#a3a39f;letter-spacing:0}
+.macro{display:grid;gap:10px}
+.mrow{display:grid;grid-template-columns:5em minmax(0,1fr) auto;gap:12px;align-items:center;font-size:15px;color:#d6d6d2}
+.bar{height:8px;background:#2a2a2c;border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--gold);border-radius:99px;transition:width .4s}
+.mrow b{font-weight:500;white-space:nowrap;font-variant-numeric:tabular-nums}
+#cstat div{grid-template-columns:8em 1em minmax(0,1fr)}
+.err{color:#f2b72a}
+@media(max-width:780px){.cgrid{grid-template-columns:minmax(0,1fr)}.fimg{position:static}}
+@media(max-width:420px){.cform{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.bar i{transition:none}}
+/* footer */
+.foot{margin:12px;border-radius:18px;background:var(--blk);color:#ededeb;padding:clamp(32px,5vw,56px) clamp(20px,4vw,48px) 28px}
+.fgrid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:28px}
+.foot h2{font-size:clamp(28px,3vw,38px)}
+.foot .d{color:#a3a39f;margin-top:12px;max-width:26em}
+.foot h4{margin:0 0 12px;color:#a3a39f;font-weight:400}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.foot ul a{text-decoration:none;color:#ededeb;font-size:13px}
+.foot ul a:hover{color:var(--gold)}
+.big{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-top:clamp(48px,8vw,110px);padding-top:22px;border-top:1px solid #2a2a2c}
+.big b{font:400 clamp(40px,7.4vw,104px)/.95 "Inter Tight",sans-serif;letter-spacing:-.04em}
+.big span{color:#a3a39f;max-width:30em}
+@media(max-width:1000px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}.fgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.fgrid>div:first-child{grid-column:1/-1}}
+@media(max-width:780px){.pill .lnk{display:none}.marks span:nth-child(2){display:none}.hb,.about,.dark .grid2,.head,.coach,.faqg{grid-template-columns:minmax(0,1fr)}.hb .r{justify-self:start}.cards{grid-template-columns:minmax(0,1fr)}.pc{min-height:260px}.wide{aspect-ratio:16/10}.calc{position:static}}
+@media(max-width:520px){.tiers{grid-template-columns:minmax(0,1fr)}.fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.spec div{grid-template-columns:7.5em 1em minmax(0,1fr)}}
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#121213">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Coach Dream">
+</head>
+<body>
+
+<div class="shell">
+  <header class="hero" id="top">
+    <img src="coach_bw.jpg" alt="โค้ชดรีม">
+    <nav aria-label="เมนูหลัก"><div class="pill">
+      <a class="brand" href="#top">Coach Dream</a>
+      <a class="lnk m" href="#about">เกี่ยวกับ</a>
+      <a class="lnk m" href="#programs">โปรแกรม</a>
+      <a class="lnk m" href="#pricing">ราคา</a>
+      <a class="lnk m" href="#online">ออนไลน์</a>
+      <a class="lnk m" href="#calc">คำนวณแคล</a>
+      <a class="lnk m" href="#faq">คำถาม</a>
+      <a class="btn" href="#contact">จองเทรน</a>
+    </div></nav>
+    <div class="marks m"><span>Build strength</span><span>Build habits</span><span>Build consistency</span></div>
+    <div class="hb">
+      <h1>สร้างร่างกายที่แข็งแรง<br>กับ <em>Coach Dream</em></h1>
+      <div class="r">
+        <p class="m">เทรนเวทส่วนตัวแบบมีแผน ออกแบบโปรแกรมเฉพาะคุณ บันทึกทุกเซต และเพิ่มความหนักทีละขั้นจนเห็นผลจริง</p>
+        <a class="btn" href="#pricing">ทดลองเทรน 500 บาท</a>
+      </div>
+    </div>
+  </header>
+</div>
+
+<section class="band" id="about">
+  <div class="wrap">
+    <div class="about">
+      <span class="m tag">เกี่ยวกับ Coach Dream</span>
+      <div>
+        <h2><b>Coach Dream Project</b> คือการเทรนเวทแบบตัวต่อตัวที่ทุกอย่างวางแผนไว้ให้ ตั้งแต่ประเมินร่างกาย ออกแบบโปรแกรม ไปจนถึงเรื่องอาหาร เพื่อให้ทุกครั้งที่มาเทรนพาคุณเข้าใกล้เป้าหมายขึ้นจริง</h2>
+        <div class="who"><img src="coach_close.jpg" alt=""><span class="m">โค้ชดรีม · เทรนเดี่ยว 1:1 และเทรนคู่ 2:1</span></div>
+        <a class="btn" href="#coach">รู้จักโค้ช</a>
+      </div>
+    </div>
+    <div class="wide"><img src="coach_close.jpg" alt="โค้ชดรีมในยิม"></div>
+  </div>
+</section>
+
+<section class="band dark">
+  <div class="wrap grid2">
+    <div>
+      <span class="m tag">รูปแบบการเทรน</span>
+      <p class="m" style="color:#a3a39f;max-width:34em">ทุกครั้งที่เทรนมีเป้าหมาย ทุกเซตถูกบันทึก และทุกสัปดาห์มีความคืบหน้าให้เห็น</p>
+      <div class="spec m" style="margin-top:28px">
+        <div><span>ระยะเวลา</span><span>:</span><span>ครั้งละ 60 นาที วอร์มอัปถึงคูลดาวน์</span></div>
+        <div><span>รูปแบบ</span><span>:</span><span>เทรนเดี่ยว 1:1 · เทรนคู่ 2:1</span></div>
+        <div><span>ทดลองเทรน</span><span>:</span><span>1 ชั่วโมง 500 บาท พร้อมวัดผล</span></div>
+        <div><span>สมาชิกยิม</span><span>:</span><span>ฟรีทุกคอร์ส สูงสุด 3 เดือน</span></div>
+        <div><span>บันทึกผล</span><span>:</span><span>Google Sheet ที่คุณเปิดดูได้</span></div>
+      </div>
+    </div>
+    <div>
+      <h2>เทรนแบบมีแผน<br>ไม่ใช่เล่นไปเรื่อยๆ</h2>
+      <p class="d">เริ่มจากวัดไขมัน กล้ามเนื้อ และสัดส่วน ประเมินท่าทางและความแข็งแรง แล้วจึงวางโปรแกรมตามเป้าหมายและจำนวนวันที่คุณมาได้จริง ตั้งแต่ 1 ถึง 4 วันต่อสัปดาห์</p>
+      <a class="btn ghost" style="margin-top:24px" href="#contact">ปรึกษาโค้ช</a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="programs">
+  <div class="wrap">
+    <div class="head">
+      <span class="m tag">โปรแกรม</span>
+      <div><h2>เลือกเป้าหมาย<br>แล้วเราวางแผนให้</h2><p>ทั้งคนที่อยากสร้างกล้าม ลดไขมัน หรือเทรนเสริมกีฬา ทุกโปรแกรมปรับตามคนที่มาเทรนจริง</p></div>
+    </div>
+    <div class="cards">
+      <article class="pc">
+        <svg class="bg" viewBox="0 0 300 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="l1" cx=".8" cy=".1" r=".9"><stop offset="0" stop-color="#4a4a4c"/><stop offset="1" stop-color="#121213"/></radialGradient></defs><rect width="300" height="360" fill="url(#l1)"/><g><g transform="translate(150 150)"><rect x="-120" y="-6" width="240" height="12" rx="4" fill="#8d8d89"/><rect x="-92" y="-52" width="18" height="104" rx="5" fill="#E0A100"/><rect x="74" y="-52" width="18" height="104" rx="5" fill="#E0A100"/><rect x="-112" y="-36" width="14" height="72" rx="4" fill="#9c7000"/><rect x="98" y="-36" width="14" height="72" rx="4" fill="#9c7000"/></g></g></svg>
+        <span class="m" style="color:#a3a39f">01 · สร้างกล้าม</span>
+        <div><h3>Lift<small>สร้างกล้ามเนื้อ เพิ่มความแข็งแรง</small></h3><p class="m" style="margin-top:12px">Upper / Lower หรือ Full Body เน้นท่าหลัก ฝึกดึงข้อ วิดพื้นให้ทำได้จริง</p></div>
+      </article>
+      <article class="pc">
+        <svg class="bg" viewBox="0 0 300 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="l2" cx=".2" cy=".1" r=".9"><stop offset="0" stop-color="#4a4a4c"/><stop offset="1" stop-color="#121213"/></radialGradient></defs><rect width="300" height="360" fill="url(#l2)"/><path d="M150 50c-30 34-48 62-48 96a48 48 0 0 0 96 0c0-34-18-62-48-96z" fill="#E0A100"/><path d="M150 132c-14 17-21 28-21 42a21 21 0 0 0 42 0c0-14-7-25-21-42z" fill="#121213"/></svg>
+        <span class="m" style="color:#a3a39f">02 · ลดไขมัน</span>
+        <div><h3>Lean<small>ลดไขมัน กระชับหุ่น</small></h3><p class="m" style="margin-top:12px">เวทควบคู่คาร์ดิโอ คุมแคลอรี่แบบไม่ต้องอด ส่งรูปอาหารให้โค้ชช่วยดูได้</p></div>
+      </article>
+      <article class="pc">
+        <svg class="bg" viewBox="0 0 300 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="l3" cx=".5" cy="0" r=".9"><stop offset="0" stop-color="#4a4a4c"/><stop offset="1" stop-color="#121213"/></radialGradient></defs><rect width="300" height="360" fill="url(#l3)"/><circle cx="150" cy="140" r="78" fill="#E0A100"/><path d="M150 100l38 27-15 44h-46l-15-44z" fill="#121213"/><path d="M150 62v38M228 128l-40-1M196 204l-23-33M104 204l23-33M72 128l40-1" stroke="#121213" stroke-width="8" fill="none"/></svg>
+        <span class="m" style="color:#a3a39f">03 · เสริมกีฬา</span>
+        <div><h3>Sport<small>เทรนเสริมกีฬาที่เล่น</small></h3><p class="m" style="margin-top:12px">ฟุตบอล วิ่ง และกีฬาอื่น เน้นขา สะโพก แกนกลาง วางตารางไม่ชนวันแข่ง</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <span class="m tag">ราคาคอร์ส</span>
+      <div><h2>แพ็กเกจเทรน</h2><p>ทดลอง 1 ชั่วโมง หรือเลือกคอร์ส 10, 20, 30 ชั่วโมง ยิ่งซื้อมาก ราคาต่อชั่วโมงยิ่งถูก ทุกคอร์สแถมสมาชิกยิมฟรี</p></div>
+    </div>
+    <div class="tabs m" role="tablist" aria-label="รูปแบบการเทรน">
+      <button role="tab" id="t1" aria-selected="true" data-k="solo">เทรนเดี่ยว 1:1</button>
+      <button role="tab" id="t2" aria-selected="false" data-k="duo">เทรนคู่ 2:1</button>
+      <button role="tab" id="t3" aria-selected="false" data-k="online">ออนไลน์ 12 สัปดาห์</button>
+    </div>
+    <div id="tiers" role="tabpanel"></div>
+    <p class="m pnote">* คอร์ส 2:1 เป็นราคารวม 2 ท่าน แถมสมาชิกทั้ง 2 ท่าน · อายุคอร์สนับจากวันที่ซื้อ ชั่วโมงที่เหลือเกินอายุคอร์สถือว่าหมดอายุ · ชำระเต็มจำนวน</p>
+  </div>
+</section>
+
+<section class="band" id="online" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <span class="m tag">เทรนออนไลน์ · เปิดรับแล้ว</span>
+      <div><h2>โค้ชดูแลทุกสัปดาห์<br>แม้ไม่ได้เจอกัน</h2><p>สำหรับคนที่อยากเล่นเวทเองแบบมีแผน ได้โปรแกรมที่ออกแบบจากเป้าหมาย อุปกรณ์ และวันที่เล่นได้จริง มีโค้ชตรวจท่าจากคลิป ติดตามผลทุกสัปดาห์ และปรับโปรแกรมให้ตลอด 12 สัปดาห์</p></div>
+    </div>
+
+    <div class="ogrid">
+      <article class="oprice">
+        <div class="top m"><span>แพ็กเกจเดียว</span><b>ราคาเดียว</b></div>
+        <h3>12 สัปดาห์</h3>
+        <div class="amt">9,900 <small>บาท</small></div>
+        <div class="per m">เฉลี่ย 825 บาท / สัปดาห์</div>
+        <ul>
+          <li>ประเมินท่าจากคลิปก่อนเริ่ม เลือกท่าที่เหมาะกับร่างกาย</li>
+          <li>โปรแกรมเวทเฉพาะคุณ ส่งเป็น 3 ช่วง ช่วงละ 4 สัปดาห์</li>
+          <li>Check-in ทุกสัปดาห์ โค้ชตอบและปรับให้ทาง LINE</li>
+          <li>วัดผลสัปดาห์ที่ 1, 4, 8, 12</li>
+          <li>ไฟล์บันทึกน้ำหนัก ครั้ง และสรุปความคืบหน้า</li>
+          <li>แนะนำอาหารเบื้องต้นตามเป้าหมาย</li>
+        </ul>
+        <div class="cta">
+          <a class="btn" href="https://script.google.com/macros/s/AKfycbwIGsFATG1C_cztPBxm6r4nfC9i6hrEtKIDfpwB8P0WylkFQ5xvJ_CD8idU3WNt_MfwqA/exec" target="_blank" rel="noopener">สมัครเทรนออนไลน์</a>
+          <a class="btn ghost" href="https://line.me/R/ti/p/@262hshjd">ถามโค้ชก่อน</a>
+        </div>
+        <p class="m nb">ยังไม่ต้องโอนเงิน จนกว่าโค้ชประเมินคลิปและแจ้งเงื่อนไขครบ</p>
+      </article>
+
+      <div class="oside">
+        <div class="obox">
+          <h3>ได้อะไรในแต่ละสัปดาห์</h3>
+          <div class="orow"><b>01</b><p><strong>เล่นตามโปรแกรม</strong>เปิดไฟล์ในมือถือ กรอกน้ำหนักและจำนวนครั้งหลังเล่นจบ มีวิธีทำท่าทุกท่า</p></div>
+          <div class="orow"><b>02</b><p><strong>ส่ง Check-in</strong>ฟอร์มสั้น ๆ ทุกสัปดาห์ น้ำหนักตัว การนอน ความเหนื่อย อาการเจ็บ และคลิปท่าที่อยากให้ดู</p></div>
+          <div class="orow"><b>03</b><p><strong>โค้ชตอบและปรับ</strong>ดูตัวเลขที่บันทึก บอกจุดที่ต้องแก้ เพิ่มหรือลดความหนักให้เหมาะกับสัปดาห์นั้น</p></div>
+          <div class="orow"><b>04</b><p><strong>วัดผลทุก 4 สัปดาห์</strong>น้ำหนัก ไขมัน รอบเอว สะโพก แขน ต้นขา วิดพื้น แพลงก์ และน้ำหนักท่าหลัก แล้วออกแบบช่วงถัดไป</p></div>
+        </div>
+        <div class="ofit">
+          <div class="obox"><h3>เหมาะกับ</h3><ul><li>คนที่เข้ายิมเองได้แต่ไม่รู้จะเล่นอะไร</li><li>คนที่เวลาไม่ตรงกับการนัดเทรน</li><li>อดีตลูกเทรนที่อยากเล่นต่อเอง</li><li>มือใหม่ที่ทำท่าพื้นฐานได้</li></ul></div>
+          <div class="obox"><h3>ต้องมี</h3><ul><li>ยิม หรือดัมเบลที่บ้าน</li><li>เล่นได้ 2–4 วัน / สัปดาห์</li><li>มือถือถ่ายคลิปได้</li><li>LINE สำหรับคุยกับโค้ช</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ohd"><h3>ขั้นตอนสมัคร</h3><span class="m" style="color:var(--muted)">ใช้เวลาประมาณ 2–4 วันก่อนเริ่มเทรน</span></div>
+    <div class="steps">
+      <div class="step"><span class="m">ขั้น 1</span><h4>กรอกใบสมัคร</h4><p>เป้าหมาย ประสบการณ์ อุปกรณ์ วันที่เล่นได้ และสุขภาพ ประมาณ 5 นาที แล้วพิมพ์ "สมัครแล้ว" ใน LINE</p></div>
+      <div class="step"><span class="m">ขั้น 2</span><h4>ส่งคลิปท่าพื้นฐาน</h4><p>รับคู่มือถ่ายคลิปและแบบสอบถามอาหารทาง LINE ภายใน 24 ชม. แล้วถ่ายตามมุมที่บอก</p></div>
+      <div class="step"><span class="m">ขั้น 3</span><h4>รับผลประเมิน</h4><p>ภายใน 24 ชม. หลังส่งคลิป โค้ชบอกท่าที่ทำได้ดี ท่าที่ต้องปรับ พร้อมเงื่อนไขทั้งหมดก่อนชำระเงิน</p></div>
+      <div class="step"><span class="m">ขั้น 4</span><h4>ชำระเงิน</h4><p>โอน 9,900 บาทผ่านพร้อมเพย์ แล้วส่งสลิปทาง LINE</p></div>
+      <div class="step"><span class="m">ขั้น 5</span><h4>เริ่มเทรน</h4><p>รับโปรแกรมช่วงแรก (สัปดาห์ 1–4) และลิงก์ Check-in ภายใน 24 ชม. หลังส่งสลิป ช่วงถัดไปส่งหลังวัดผลสัปดาห์ที่ 4 และ 8</p></div>
+    </div>
+
+    <div class="ohd"><h3>เงื่อนไขการคืนเงิน</h3><span class="m" style="color:var(--muted)">แจ้งให้ทราบก่อนชำระเงินทุกครั้ง</span></div>
+    <div class="refund">
+      <div class="rrow m"><span>กรณี</span><span>ได้คืน</span><span>เหตุผล</span></div>
+      <div class="rrow"><span>เปลี่ยนใจภายใน 7 วันหลังโอน ยังไม่ได้รับโปรแกรม</span><b>9,900</b><span>คืนเต็มจำนวน โค้ชยังไม่ได้ให้บริการ</span></div>
+      <div class="rrow"><span>เปลี่ยนใจภายใน 7 วันหลังโอน ได้รับโปรแกรมแล้ว</span><b>7,575</b><span>หัก 2,325 = ค่าออกแบบโปรแกรม 1,500 + ค่าดูแลสัปดาห์แรก 825</span></div>
+      <div class="rrow"><span>โค้ชประเมินคลิปแล้วรับเทรนไม่ได้</span><b>9,900</b><span>คืนเต็มจำนวน</span></div>
+      <div class="rrow"><span>หยุดกลางคันเพราะปัญหาสุขภาพ (มีใบรับรองแพทย์) หรือโค้ชดูแลต่อไม่ได้</span><b>825 × สัปดาห์</b><span>คืนตามสัปดาห์ที่เหลือ เช่น หยุดหลังสัปดาห์ที่ 4 คืน 6,600</span></div>
+      <div class="rrow"><span>เกิน 7 วัน และเลิกเองด้วยเหตุผลอื่น</span><b>ไม่คืน</b><span>ขอพักโปรแกรมได้ 1 ครั้ง ไม่เกิน 4 สัปดาห์ แล้วกลับมาเทรนต่อจนครบ</span></div>
+      <div class="rfoot m">รูปแบบการส่งโปรแกรม: ส่งเป็น 3 ช่วง ช่วงละ 4 สัปดาห์ · ช่วงแรกส่งหลังชำระเงิน · ช่วง 2 และ 3 ส่งภายใน 24 ชั่วโมงหลังวัดผลสัปดาห์ที่ 4 และ 8 · ไม่ได้รับโปรแกรมทั้ง 12 สัปดาห์ในวันแรก</div>
+      <div class="rfoot m">โอนเงินคืนภายใน 15 วันหลังแจ้ง · แจ้งขอคืนเงินหรือพักโปรแกรมทาง LINE</div>
+    </div>
+    <p class="m disc">* ผลลัพธ์ของแต่ละคนไม่เท่ากัน ขึ้นกับความสม่ำเสมอ การนอน อาหาร และสภาพร่างกาย โค้ชไม่การันตีตัวเลขน้ำหนักหรือไขมันที่ลดได้ · ผู้มีโรคประจำตัวหรือตั้งครรภ์ควรปรึกษาแพทย์ก่อนเริ่ม</p>
+  </div>
+</section>
+
+<section class="band dark" id="coach">
+  <div class="wrap coach">
+    <div>
+      <figure><img src="coach_bw.jpg" alt="โค้ชดรีม"></figure>
+      <div class="cap m"><span>โค้ชดรีม</span><span>Personal trainer</span></div>
+    </div>
+    <div>
+      <span class="m tag">โค้ชของคุณ</span>
+      <h2>คนที่อยู่เบื้องหลัง<br>ความคืบหน้าของคุณ</h2>
+      <p class="d">เทรนเองจริง วัดผลจริง และดูแลลูกเทรนทุกคนด้วยโปรแกรมที่ออกแบบเฉพาะ ไม่ใช่โปรแกรมสำเร็จรูป</p>
+      <ul class="m">
+        <li><b>มือใหม่</b><span>สอนท่าพื้นฐานและใช้น้ำหนักเบาก่อน</span></li>
+        <li><b>ท่าทาง</b><span>ประเมินท่า ความยืดหยุ่น ลดโอกาสบาดเจ็บ</span></li>
+        <li><b>อาหาร</b><span>แนะนำปริมาณที่เหมาะ ส่งรูปอาหารให้ดูได้</span></li>
+        <li><b>ยืดหยุ่น</b><span>ลาหรือเลื่อนได้ ชั่วโมงไม่หายภายในอายุคอร์ส</span></li>
+      </ul>
+      <div class="cert" lang="en">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="16" r="12" fill="none" stroke="#E0A100" stroke-width="2.5"/><path d="M14 26l-3 11 9-4 9 4-3-11" fill="none" stroke="#E0A100" stroke-width="2.5" stroke-linejoin="round"/><path d="M15 16l3.5 3.5L25 13" fill="none" stroke="#E0A100" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h3>Certified Personal Fitness Trainer</h3>
+          <p>Pongsatorn Nuannirun completed the 100-hour personal trainer course and met all of its requirements.</p>
+          <dl>
+            <dt>Issued by</dt><dd>Smartgym Fitness (Thailand) Limited</dd>
+            <dt>In partnership</dt><dd>Bangkokthonburi University Sport Science Center</dd>
+            <dt>Certified since</dt><dd>12 September 2020</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band dark" id="calc">
+  <div class="wrap">
+    <div class="head">
+      <span class="m tag">เครื่องคำนวณฟรี</span>
+      <div><h2>ควรกินวันละกี่แคลอรี่</h2><p class="d">กรอกข้อมูลแล้วดูผลทันที คำนวณด้วยสูตร Mifflin-St Jeor พร้อมปริมาณโปรตีน คาร์บ และไขมันที่แนะนำ</p></div>
+    </div>
+    <div class="cgrid">
+      <div class="cform">
+        <div class="f2"><span class="m">เพศ</span><div class="seg" id="sex"><button type="button" data-v="f" aria-pressed="true">หญิง</button><button type="button" data-v="m" aria-pressed="false">ชาย</button></div></div>
+        <label><span class="m">อายุ (ปี)</span><input id="age" type="number" inputmode="numeric" min="15" max="80" value="28"></label>
+        <label><span class="m">น้ำหนัก (กก.)</span><input id="wt" type="number" inputmode="decimal" min="30" max="200" step="0.1" value="58"></label>
+        <label><span class="m">ส่วนสูง (ซม.)</span><input id="ht" type="number" inputmode="numeric" min="130" max="210" value="162"></label>
+        <label><span class="m">ระดับกิจกรรม</span><select id="act">
+          <option value="1.2">นั่งทำงาน แทบไม่ออกกำลังกาย</option>
+          <option value="1.375" selected>ออกกำลังกาย 1–3 วัน/สัปดาห์</option>
+          <option value="1.55">ออกกำลังกาย 3–5 วัน/สัปดาห์</option>
+          <option value="1.725">ออกกำลังกายหนัก 6–7 วัน</option>
+        </select></label>
+        <div class="f2"><span class="m">เป้าหมาย</span><div class="seg" id="goal"><button type="button" data-v="cut" aria-pressed="true">ลดไขมัน</button><button type="button" data-v="keep" aria-pressed="false">คงน้ำหนัก</button><button type="button" data-v="bulk" aria-pressed="false">เพิ่มกล้าม</button></div></div>
+      </div>
+      <div class="cres" aria-live="polite">
+        <span class="m" style="color:#a3a39f">เป้าหมายพลังงานต่อวัน</span>
+        <div class="kc"><span id="kcal">0</span> <small>kcal</small></div>
+        <div id="macro" class="macro"></div>
+        <div class="spec m" id="cstat"></div>
+        <p class="m" style="color:#8a8a86">ค่าประมาณสำหรับเริ่มต้น ไม่ใช่คำแนะนำทางการแพทย์ · โค้ชจะปรับให้ตามผลจริง</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq">
+  <div class="wrap">
+    <div class="head">
+      <span class="m tag">คำถามที่พบบ่อย</span>
+      <div><h2>ทุกอย่างที่ควรรู้<br>ก่อนเริ่มเทรน</h2></div>
+    </div>
+    <div class="faqg">
+      <div>
+        <details open><summary>ไม่เคยเล่นเวทมาก่อน เริ่มได้ไหม</summary><p class="m">ได้ ครั้งแรกจะสอนท่าพื้นฐานและใช้น้ำหนักเบาก่อน แล้วค่อยเพิ่มตามความพร้อม</p></details>
+        <details><summary>ทดลองเทรนก่อนซื้อคอร์สได้ไหม</summary><p class="m">ได้ ทดลอง 1 ชั่วโมง 500 บาท (2:1 ราคา 750 บาท) แถมวัดไขมัน กล้ามเนื้อ สัดส่วน ประเมินท่า และใบสรุปผล</p></details>
+        <details><summary>ต้องมาเทรนสัปดาห์ละกี่วัน</summary><p class="m">เริ่มได้ตั้งแต่ 1 วัน แต่ 2–3 วันต่อสัปดาห์จะเห็นผลชัดกว่า</p></details>
+        <details><summary>ลาหรือเลื่อนได้ไหม</summary><p class="m">ได้ แจ้งล่วงหน้าแล้วนัดใหม่ ชั่วโมงไม่หายภายในอายุคอร์ส แต่ชั่วโมงที่เหลือเกินอายุคอร์สถือว่าหมดอายุ</p></details>
+        <details><summary>เทรนออนไลน์ต่างจากเทรนที่ยิมยังไง</summary><p class="m">เทรนที่ยิมมีโค้ชอยู่ข้าง ๆ ทุกครั้ง ส่วนออนไลน์คุณเล่นเองตามโปรแกรม แล้วโค้ชตรวจท่าจากคลิปและปรับโปรแกรมจาก Check-in ทุกสัปดาห์ ราคา 12 สัปดาห์ 9,900 บาท ดูรายละเอียดในหัวข้อเทรนออนไลน์</p></details>
+        <details><summary>ไม่เคยเล่นเวท สมัครออนไลน์ได้ไหม</summary><p class="m">ได้ถ้าทำท่าพื้นฐานได้ โค้ชจะดูจากคลิปก่อน ถ้าท่าไหนยังไม่พร้อมจะคุยกันก่อนชำระเงิน บางคนอาจเหมาะกับการเทรนที่ยิมก่อนสัก 2–3 ครั้ง</p></details>
+      </div>
+      <figure class="fimg"><img src="coach_close.jpg" alt="โค้ชดรีม"></figure>
+    </div>
+  </div>
+</section>
+
+<footer class="foot" id="contact">
+  <div class="fgrid">
+    <div>
+      <h2>Built for strength.</h2>
+      <p class="d m">ทักมาบอกเป้าหมายและวันเวลาที่สะดวก โค้ชจะแนะนำแพ็กเกจที่เหมาะกับคุณ</p>
+      <a class="btn" style="margin-top:20px" href="https://line.me/R/ti/p/@262hshjd">แอด LINE @262hshjd</a>
+    </div>
+    <div><h4 class="m">เทรน</h4><ul class="m"><li><a href="#programs">Lift</a></li><li><a href="#programs">Lean</a></li><li><a href="#programs">Sport</a></li><li><a href="#pricing">ทดลองเทรน</a></li><li><a href="#online">เทรนออนไลน์</a></li></ul></div>
+    <div><h4 class="m">Coach Dream</h4><ul class="m"><li><a href="#about">เกี่ยวกับ</a></li><li><a href="#pricing">ราคาคอร์ส</a></li><li><a href="#coach">โค้ช</a></li><li><a href="#faq">คำถามที่พบบ่อย</a></li></ul></div>
+    <div><h4 class="m">ติดต่อ</h4><ul class="m"><li><a href="https://line.me/R/ti/p/@262hshjd">LINE @262hshjd</a></li><li><a href="https://www.instagram.com/dream_pongsaton/">IG @dream_pongsaton</a></li><li><a href="https://www.facebook.com/share/18y2jWgqLt/">Facebook</a></li></ul></div>
+  </div>
+  <div class="big"><b>Coach Dream Project</b><span class="m">Stronger · Smarter · Better — © 2026</span></div>
+</footer>
+
+<script>
+{
+const P={
+  solo:[
+    {n:"ทดลอง",h:1,p:500,per:"ครั้งเดียว",f:["วัดไขมัน / กล้ามเนื้อ + สัดส่วน","ประเมินท่าทาง","ใบสรุปผล"]},
+    {n:"เริ่มต้น",h:10,p:4500,per:"450 บาท / ชม.",f:["ฟรีสมาชิก 1 เดือน","อายุคอร์ส 2 เดือน"]},
+    {n:"แนะนำ",h:20,p:7900,per:"395 บาท / ชม.",save:"ประหยัด 1,100",best:1,f:["ฟรีสมาชิก 2 เดือน","อายุคอร์ส 4 เดือน"]},
+    {n:"คุ้มสุด",h:30,p:10900,per:"363 บาท / ชม.",save:"ประหยัด 2,600",f:["ฟรีสมาชิก 3 เดือน","อายุคอร์ส 6 เดือน"]}],
+  duo:[
+    {n:"ทดลอง",h:1,p:750,per:"คนละ 375",f:["วัดไขมัน / กล้ามเนื้อ + สัดส่วน ทั้ง 2 ท่าน","ใบสรุปผล"]},
+    {n:"เริ่มต้น",h:10,p:6500,per:"คนละ 3,250",f:["ฟรีสมาชิก 1 เดือน ทั้ง 2 ท่าน","อายุคอร์ส 2 เดือน"]},
+    {n:"แนะนำ",h:20,p:11500,per:"คนละ 5,750",save:"ประหยัด 1,500",best:1,f:["ฟรีสมาชิก 2 เดือน ทั้ง 2 ท่าน","อายุคอร์ส 4 เดือน"]},
+    {n:"คุ้มสุด",h:30,p:15900,per:"คนละ 7,950",save:"ประหยัด 3,600",f:["ฟรีสมาชิก 3 เดือน ทั้ง 2 ท่าน","อายุคอร์ส 6 เดือน"]}]
+};
+const box=document.getElementById('tiers');
+const tabs=[...document.querySelectorAll('.tabs button')];
+const baht=n=>n.toLocaleString('th-TH');
+const show=k=>{
+  box.className=k==='online'?'':'tiers';
+  box.innerHTML=k==='online'
+    ?`<div class="soon"><span class="m" style="color:var(--goldt)">เปิดรับแล้ว</span><h3>เทรนออนไลน์ 12 สัปดาห์ · 9,900 บาท</h3><p>รับโปรแกรมเฉพาะคุณไปเล่นเองได้ทุกที่ โค้ชประเมินท่าจากคลิป ติดตาม Check-in ทุกสัปดาห์ และวัดผลทุก 4 สัปดาห์</p><a class="btn" style="margin-top:16px" href="#online">ดูรายละเอียด</a></div>`
+    :P[k].map(t=>`<article class="tier${t.best?' best':''}"><div class="top m"><span>${t.n}</span>${t.save?`<b>${t.save}</b>`:''}</div><h3>${t.h} ชั่วโมง</h3><div class="amt">${baht(t.p)} <small>บาท</small></div><div class="per m">${t.per}</div><ul>${t.f.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
+  tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.k===k));
+  box.setAttribute('aria-labelledby',tabs.find(b=>b.dataset.k===k).id);
+};
+tabs.forEach(b=>b.addEventListener('click',()=>show(b.dataset.k)));
+show('solo');
+const st={sex:'f',goal:'cut'};
+const $=id=>document.getElementById(id);
+const fmt=n=>Math.round(n).toLocaleString('th-TH');
+const seg=id=>{const el=$(id);el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[id]=b.dataset.v;[...el.children].forEach(x=>x.setAttribute('aria-pressed',x===b));calc();});};
+const calc=()=>{
+  const a=+$('age').value,w=+$('wt').value,h=+$('ht').value,act=+$('act').value;
+  if(!(a>=15&&a<=80&&w>=30&&w<=200&&h>=130&&h<=210)){$('kcal').textContent='–';$('macro').innerHTML='<p class="err m">กรอกอายุ 15–80 ปี น้ำหนัก 30–200 กก. ส่วนสูง 130–210 ซม.</p>';$('cstat').innerHTML='';return;}
+  const bmr=10*w+6.25*h-5*a+(st.sex==='m'?5:-161),tdee=bmr*act;
+  const adj={cut:-400,keep:0,bulk:250}[st.goal],floor=st.sex==='m'?1500:1200;
+  const k=Math.max(tdee+adj,floor);
+  const pro=w*(st.goal==='keep'?1.6:st.goal==='cut'?2:1.8),fat=Math.max(k*.25/9,w*.6),carb=Math.max((k-pro*4-fat*9)/4,0);
+  const rows=[['โปรตีน',pro],['คาร์บ',carb],['ไขมัน',fat]],mx=Math.max(...rows.map(r=>r[1]));
+  const bmi=w/((h/100)**2),bl=bmi<18.5?'น้ำหนักน้อย':bmi<23?'ปกติ':bmi<25?'ท้วม':bmi<30?'อ้วนระดับ 1':'อ้วนระดับ 2';
+  $('kcal').textContent=fmt(k);
+  $('macro').innerHTML=rows.map(([n,g])=>`<div class="mrow"><span>${n}</span><div class="bar"><i style="width:${g/mx*100}%"></i></div><b>${fmt(g)} ก.</b></div>`).join('');
+  $('cstat').innerHTML=`<div><span>BMR</span><span>:</span><span>${fmt(bmr)} kcal</span></div><div><span>ใช้ต่อวัน</span><span>:</span><span>${fmt(tdee)} kcal</span></div><div><span>BMI</span><span>:</span><span>${bmi.toFixed(1)} · ${bl}</span></div>`;
+};
+seg('sex');seg('goal');
+['age','wt','ht','act'].forEach(id=>$(id).addEventListener('input',calc));
+calc();
+}
+</script>
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js'))}</script>
+</body>
+</html>
