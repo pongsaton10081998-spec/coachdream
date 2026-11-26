@@ -1,4 +1,4 @@
-const CACHE = 'coachdream-v7';
+const CACHE = 'coachdream-v9';
 const FILES = ['./', './index.html', './coach_bw.jpg', './coach_close.jpg', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
